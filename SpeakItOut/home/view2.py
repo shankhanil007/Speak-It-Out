@@ -240,40 +240,44 @@ def buffer(request, slug, id):
 
 
 
-def sendMessage(request, slug, id, source):
+def sendMessage(request, slug, id):
 
-    if source == "buffer":
-        message = Buffer.objects.get(sno = id)
+    # if source == "buffer":
+    #     message = Buffer.objects.filter(sno = id)
 
-        # finding the text box to type message in text box.
-        x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
-        driver.find_element_by_xpath(x_path).send_keys(message.content)
-        driver.implicitly_wait(10)
+    #     # finding the text box to type message in text box.
+    #     x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
+    #     driver.find_element_by_xpath(x_path).send_keys(message.content)
+    #     driver.implicitly_wait(10)
+    #     # getting the message button in google meet.
+    #     xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
+    #     driver.find_element_by_xpath(xpath_btn).click()
+    #     driver.implicitly_wait(10)
 
-        # getting the message button in google meet.
-        xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
-        driver.find_element_by_xpath(xpath_btn).click()
-        driver.implicitly_wait(10)
+    #     message.delete()
+    #     messages = Buffer.objects.filter(code = slug)
+    #     context={'code':slug, 'messages': messages}
+    #     return render(request, "bufferMessages.html", context)
+    
+    # else : 
+    message = Message.objects.get(sno = id)
+    print(message.content)
 
-        message.delete()
-        messages = Buffer.objects.filter(code = slug)
-        context={'code':slug, 'messages': messages}
-        return render(request, "bufferMessages.html", context)
+    # finding the text box to type message in text box.
+    x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
+    driver.find_element_by_xpath(x_path).send_keys(message.content)
+    driver.implicitly_wait(10)
 
-    else:
-        message = Message.objects.get(sno = id)
+    print("Typed")
 
-        # finding the text box to type message in text box.
-        x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
-        driver.find_element_by_xpath(x_path).send_keys(message.content)
-        driver.implicitly_wait(10)
+    # getting the message button in google meet.
+    xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
+    driver.find_element_by_xpath(xpath_btn).click()
+    driver.implicitly_wait(10)
 
-        # getting the message button in google meet.
-        xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
-        driver.find_element_by_xpath(xpath_btn).click()
-        driver.implicitly_wait(10)
+    print("sent")
 
-        message.delete()
-        messages = Message.objects.filter(code = slug)
-        context={'code':slug, 'messages': messages}
-        return render(request, "newMessages.html", context)
+    message.delete()
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)
