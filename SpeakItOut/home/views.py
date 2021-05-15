@@ -190,11 +190,6 @@ def meetActivate(request):
         meet.save()
         return redirect(f"/{meetCode}/newMessages")
 
-def newMessages(request, slug): 
-    messages = Message.objects.filter(code = slug)
-    context={'code':slug, 'messages': messages}
-    return render(request, "newMessages.html", context)
-
 
 def enter(request, slug): 
 
@@ -235,3 +230,15 @@ def enter(request, slug):
     messages = Message.objects.filter(code = slug)
     context={'code':slug, 'messages': messages}
     return render(request, "newMessages.html", context)
+
+
+def newMessages(request, slug): 
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)
+
+
+def bufferMessages(request, slug): 
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "bufferMessages.html", context)

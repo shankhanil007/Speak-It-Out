@@ -11,8 +11,8 @@ urlpatterns = [
     path('<slug>/postMessage', views.postMessage, name="postMessage"),
     path('dashboard', views.dashboard, name="dashboard"),
     path('meet/activate', views.meetActivate, name="meetActivate"),
-    path('<slug>/newMessages', views.newMessages, name="newMessages"),
     path('<slug>/enter', views.enter, name="enter"),
-    
+    path('<slug>/newMessages', views.newMessages, name="newMessages"),
+    path('<slug>/bufferMessages', views.bufferMessages, name="bufferMessages"),
 
 ]
