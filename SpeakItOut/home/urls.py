@@ -15,7 +15,7 @@ urlpatterns = [
     path('<slug>/newMessages', views.newMessages, name="newMessages"),
     path('<slug>/bufferMessages', views.bufferMessages, name="bufferMessages"),
 
-    # path('<slug>/sendMessage/<str:id>', views.sendMessage, name="sendMessage"),
+    path('<slug>/sendMessage/<str:id>/<str:source', views.sendMessage, name="sendMessage"),
     path('<slug>/buffer/<str:id>', views.buffer, name="buffer"),
     path('<slug>/deleteMessage/<str:id>', views.deleteMessage, name="deleteMessage"),
     

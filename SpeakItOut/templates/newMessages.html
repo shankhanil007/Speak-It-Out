@@ -33,7 +33,7 @@
             {% for message in messages %}
             <tr>
                 <td>{{message.content}}</td>
-                <td><a href="/{{code}}/sendMessage/{{message.sno}}" class="btn btn-success btn-sm">Send</a></td>
+                <td><a href="/{{code}}/sendMessage/{{message.sno}}/new" class="btn btn-success btn-sm">Send</a></td>
                 <td><a href="/{{code}}/buffer/{{message.sno}}" class="btn btn-warning btn-sm">Buffer</a></td>
                 <td><a href="/{{code}}/deleteMessage/{{message.sno}}" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
