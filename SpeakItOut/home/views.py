@@ -146,7 +146,9 @@ def meet(request):
                 context={'code':code}
                 return render(request, "postMessage.html", context)
 
+            messages.error(request, "The meeting code is not active")
             return render(request, "home.html")
+        messages.error(request, "The meeting code is not active")
         return render(request, "home.html")
 
 
