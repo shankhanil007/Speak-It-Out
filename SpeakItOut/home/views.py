@@ -85,25 +85,21 @@ def handleSignUp(request):
         pass1=request.POST['pass1']
         pass2=request.POST['pass2']
 
-        # check for errorneous input
-        if len(username)<10:
-            messages.error(request, " Your user name must be under 10 characters")
-            return render(request, "dashboard.html")
-
         if not username.isalnum():
             messages.error(request, " User name should only contain letters and numbers")
-            return render(request, "dashboard.html")
+            return redirect('dashboard')
         if (pass1!= pass2):
              messages.error(request, " Passwords do not match")
-             return render(request, "dashboard.html")
+             return redirect('dashboard')
         
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name= fname
         myuser.last_name= lname
         myuser.save()
-        # messages.success(request, " Your iCoder has been successfully created")
-        return render(request, "dashboard.html")
+        login(request, myuser)
+        messages.success(request, "Account successfully created")
+        return redirect('dashboard')
 
     else:
         return HttpResponse("404 - Not found")
@@ -118,19 +114,19 @@ def handeLogin(request):
         user=authenticate(username= loginusername, password= loginpassword)
         if user is not None:
             login(request, user)
-            # messages.success(request, "Successfully Logged In")
-            return render(request, "dashboard.html")
+            messages.success(request, "Successfully Logged In")
+            return redirect('dashboard')
         else:
-            # messages.error(request, "Invalid credentials! Please try again")
-            return render(request, "dashboard.html")
+            messages.error(request, "Invalid credentials! Please try again")
+            return redirect('dashboard')
 
     return HttpResponse("404- Not found")
     return HttpResponse("login")
 
 def handelLogout(request):
     logout(request)
-    # messages.success(request, "Successfully logged out")
-    return render(request, "dashboard.html")
+    messages.success(request, "Successfully logged out")
+    return redirect('dashboard')
 
 def dashboard(request): 
     return render(request, "dashboard.html")
