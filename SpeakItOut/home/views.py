@@ -133,3 +133,7 @@ def dashboard(request):
 
 def meet(request): 
     return render(request, "meet.html")
+
+
+def newMessages(request): 
+    return render(request, "newMessages.html")
