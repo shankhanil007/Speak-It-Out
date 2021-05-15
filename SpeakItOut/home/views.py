@@ -96,7 +96,7 @@ def enter(request):
             "profile.default_content_setting_values.geolocation": 0,
             "profile.default_content_setting_values.notifications": 1
         })
-        driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
+        global driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
 
         # login to Google account
         Glogin(mail_address, password, driver)
