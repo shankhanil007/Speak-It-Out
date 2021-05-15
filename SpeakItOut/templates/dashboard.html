@@ -29,9 +29,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST"> {% csrf_token %}
+                    <form action="meet/activate" method="POST"> {% csrf_token %}
                         <div class="form-group">
-                            <label for="username">Enter your meet code</label>
+                            <label for="meetCode">Enter your meet code</label>
                             <input type="text" class="form-control" id="meetCode" name="meetCode" placeholder="uos-qidg-ihs"required>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>

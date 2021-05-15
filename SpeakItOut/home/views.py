@@ -125,10 +125,6 @@ def dashboard(request):
 #     return render(request, "meet.html")
 
 
-def newMessages(request): 
-    return render(request, "newMessages.html")
-
-
 
 #------------------------------------------------------------------------------------------------
 
@@ -212,11 +208,20 @@ def postMessage(request,slug):
 
     if request.method == "POST":
         content = request.POST.get('content')
-        print(content)
         meet= Meet.objects.get(code=slug)
         m=Message(content=content, meet=meet)
         m.save()
         context={'code':slug}
-        print(slug)
         return render(request, "postMessages.html", context)
 
+
+def meetActivate(request): 
+
+    if request.method == "POST":
+        meetCode = request.POST.get('meetCode')
+        meet = Meet(code=meetCode, status=True)
+        meet.save()
+        return redirect(f"/{meetCode}/newMessages")
+
+def newMessages(request, slug): 
+    return render(request, "newMessages.html")
