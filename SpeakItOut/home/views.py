@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from django.contrib.auth.models import User 
 from django.contrib.auth  import authenticate,  login, logout
-from home.models import Meet, Message
+from home.models import Meet, Message, Buffer
 
 # assign email id and password
 mail_address = 'tatusharma321@gmail.com'
@@ -242,3 +242,19 @@ def bufferMessages(request, slug):
     messages = Message.objects.filter(code = slug)
     context={'code':slug, 'messages': messages}
     return render(request, "bufferMessages.html", context)
+
+def deleteMessage(request, slug, id): 
+    message = Message.objects.get(sno = id)
+    message.delete()
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)
+
+def buffer(request, slug, id): 
+    message = Message.objects.get(sno = id)
+    buffer = Buffer(content=message.content, meet=message.meet, code=slug)
+    buffer.save()
+    message.delete()
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)

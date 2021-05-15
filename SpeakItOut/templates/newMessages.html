@@ -24,18 +24,18 @@
             <thead>
             <tr>
                 <th scope="col">Messages</th>
-                <th scope="col">Accept</th>
+                <th scope="col">Send</th>
                 <th scope="col">Buffer</th>
-                <th scope="col">Cancel</th>
+                <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>
             {% for message in messages %}
             <tr>
                 <td>{{message.content}}</td>
-                <td><a href="/{{code}}/sendMessage/{{message.sno}}" class="btn btn-success btn-sm">Accept</a></td>
-                <td><a href="/{{code}}/deleteMessage/{{message.sno}}">Buffer</a></td>
-                <td><a href="/{{code}}/buffer/{{message.sno}}" class="btn btn-danger btn-sm">Cancel</a></td>
+                <td><a href="/{{code}}/sendMessage/{{message.sno}}" class="btn btn-success btn-sm">Send</a></td>
+                <td><a href="/{{code}}/buffer/{{message.sno}}" class="btn btn-warning btn-sm">Buffer</a></td>
+                <td><a href="/{{code}}/deleteMessage/{{message.sno}}" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
             {% endfor %}
             </tbody>

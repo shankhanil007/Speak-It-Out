@@ -1,4 +1,4 @@
 from django.contrib import admin
-from home.models import Meet, Message
+from home.models import Meet, Message, Buffer
 
-admin.site.register((Meet, Message))
+admin.site.register((Meet, Message, Buffer))
