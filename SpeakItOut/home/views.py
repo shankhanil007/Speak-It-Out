@@ -67,16 +67,16 @@ def AskToJoin(driver):
 	# Ask to join and join now buttons have same xpaths
 
 
-def Message(message, driver):
-	# finding the text box to type message in text box.
-	x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
-	driver.find_element_by_xpath(x_path).send_keys(message)
-	driver.implicitly_wait(10)
+# def Message(message, driver):
+# 	# finding the text box to type message in text box.
+# 	x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
+# 	driver.find_element_by_xpath(x_path).send_keys(message)
+# 	driver.implicitly_wait(10)
 
-	# getting the message button in google meet.
-	xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
-	driver.find_element_by_xpath(xpath_btn).click()
-	driver.implicitly_wait(10)
+# 	# getting the message button in google meet.
+# 	xpath_btn = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[2]/span'
+# 	driver.find_element_by_xpath(xpath_btn).click()
+# 	driver.implicitly_wait(10)
 
 def enter(request): 
 
@@ -214,9 +214,8 @@ def postMessage(request,slug):
         content = request.POST.get('content')
         print(content)
         meet= Meet.objects.get(code=slug)
-        message_instance = Message.objects.create(content=content, meet=meet)
-        # m=Message(content=content, meet=meet)
-        # m.save()
+        m=Message(content=content, meet=meet)
+        m.save()
         context={'code':slug}
         print(slug)
         return render(request, "postMessages.html", context)

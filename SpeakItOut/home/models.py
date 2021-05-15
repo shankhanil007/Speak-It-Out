@@ -15,9 +15,8 @@ class Message(models.Model):
      content= models.TextField()
      meet=models.ForeignKey(Meet, on_delete=models.CASCADE)
 
-
      def __str__(self):
-          return self.content[0:5]
+          return self.content[0:15]
 
 
 
