@@ -21,3 +21,11 @@ class Message(models.Model):
 
 
 
+class Buffer(models.Model):
+     sno= models.AutoField(primary_key=True)
+     content= models.TextField()
+     code=models.CharField(max_length=15)
+     meet=models.ForeignKey(Meet, on_delete=models.CASCADE)
+
+     def __str__(self):
+          return self.content[0:15]
