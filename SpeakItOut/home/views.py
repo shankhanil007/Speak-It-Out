@@ -130,3 +130,6 @@ def postMessage(request):
 
 def dashboard(request): 
     return render(request, "dashboard.html")
+
+def meet(request): 
+    return render(request, "meet.html")

@@ -7,4 +7,5 @@ urlpatterns = [
     path('enter', views.enter, name="enter"),
     path('message', views.postMessage, name="postMessage"),
     path('dashboard', views.dashboard, name="dashboard"),
+    path('meet', views.meet, name="meet"),
 ]
