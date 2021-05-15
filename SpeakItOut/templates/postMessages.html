@@ -6,7 +6,7 @@
 
     <div class ="container">
         <div class="jumbotron">
-            <h1 class="display-4">Meet Code : uos-qidg-ihs</h1>
+            <h1 class="display-4">Meet Code : {{code}}</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -15,11 +15,11 @@
 
     <div class="container">
         <h1 class="text-center">Enter your question</h1>
-        <form method="post" action="#">
+        <form method="post" action="{{code}}/postMessage">
         {% csrf_token %}
             <div class="form-group">
-                <label for="name">Question</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="How to get started with CP">
+                <label for="content">Question</label>
+                <input type="text" class="form-control" id="content" name="content" placeholder="How to get started with CP">
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>

@@ -78,10 +78,6 @@ def Message(message, driver):
 	driver.find_element_by_xpath(xpath_btn).click()
 	driver.implicitly_wait(10)
 
-
-def home(request): 
-    return render(request, "home.html")
-
 def enter(request): 
 
     if request.method == "POST":
@@ -122,14 +118,6 @@ def enter(request):
         return render(request, "home.html")
 
 
-
-def postMessage(request): 
-
-    if request.method == "POST":
-        msg = request.POST.get('msg')
-        Message(msg,driver)
-        return render(request, "home.html")
-
 def dashboard(request): 
     return render(request, "dashboard.html")
 
@@ -142,7 +130,10 @@ def newMessages(request):
 
 
 
+#------------------------------------------------------------------------------------------------
 
+def home(request): 
+    return render(request, "home.html")
 
 def handleSignUp(request):
     if request.method=="POST":
@@ -206,11 +197,27 @@ def meet(request):
 
     if request.method=="POST":
         code=request.POST['code']
-        meet_obj = Meet.objects.filter(user = user_obj ).first()
+        meet_obj = Meet.objects.filter(code = code).first()
 
         if meet_obj:
             if meet_obj.status :
-                return render(request, "postMessages.html")
+                context={'code':code}
+                return render(request, "postMessages.html", context)
+
+            return render(request, "home.html")
+        return render(request, "home.html")
 
 
+def postMessage(request,slug): 
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+        print(content)
+        meet= Meet.objects.get(code=slug)
+        message_instance = Message.objects.create(content=content, meet=meet)
+        # m=Message(content=content, meet=meet)
+        # m.save()
+        context={'code':slug}
+        print(slug)
+        return render(request, "postMessages.html", context)
 

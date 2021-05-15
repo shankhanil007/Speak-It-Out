@@ -21,12 +21,12 @@
             <hr class="my-4">
             <p>Please enter the meeting code below to check whether it is active or not and send messages accordingly.</p>
             <p class="lead">
-                <form action="#" method="POST">
+                <form action="meet" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="form-group">
                             <label for="code">Enter Meet Code</label>
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Enter the meeting code">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="uos-qidg-ihs">
                         </div>
                         <button class="btn btn-primary" type="submit">Submit</button>
                     </div>

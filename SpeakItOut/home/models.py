@@ -12,11 +12,12 @@ class Meet(models.Model):
 
 class Message(models.Model):
      sno= models.AutoField(primary_key=True)
-     content=models.CharField(max_length=500)
+     content= models.TextField()
      meet=models.ForeignKey(Meet, on_delete=models.CASCADE)
 
+
      def __str__(self):
-          return self.content
+          return self.content[0:5]
 
 
 
