@@ -209,7 +209,7 @@ def postMessage(request,slug):
     if request.method == "POST":
         content = request.POST.get('content')
         meet= Meet.objects.get(code=slug)
-        m=Message(content=content, meet=meet)
+        m=Message(content=content, meet=meet, code=slug)
         m.save()
         context={'code':slug}
         return render(request, "postMessages.html", context)
@@ -224,4 +224,6 @@ def meetActivate(request):
         return redirect(f"/{meetCode}/newMessages")
 
 def newMessages(request, slug): 
-    return render(request, "newMessages.html")
+    messages = Message.objects.filter(meet = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)

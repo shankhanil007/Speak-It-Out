@@ -6,7 +6,7 @@
 
     <div class ="container">
         <div class="jumbotron">
-            <h1 class="display-4">Meet Code : uos-qidg-ihs</h1>
+            <h1 class="display-4">Meet Code : {{code}}</h1>
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -59,18 +59,14 @@
             </tr>
             </thead>
             <tbody>
+            {{for message in messages}}
             <tr>
-                <td>Hello World</td>
+                <td>message.content</td>
                 <td><a href="#" class="btn btn-success btn-sm">Accept</a></td>
                 <td><a href="#" class="btn btn-warning btn-sm">Buffer</a></td>
                 <td><a href="#" class="btn btn-danger btn-sm">Cancel</a></td>
             </tr>
-            <tr>
-                <td>Hello World</td>
-                <td><a href="#" class="btn btn-success btn-sm">Accept</a></td>
-                <td><a href="#" class="btn btn-warning btn-sm">Buffer</a></td>
-                <td><a href="#" class="btn btn-danger btn-sm">Cancel</a></td>
-            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
