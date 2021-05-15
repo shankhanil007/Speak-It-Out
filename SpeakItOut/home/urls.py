@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('enter', views.enter, name="enter"),
     path('message', views.postMessage, name="postMessage"),
+    path('dashboard', views.dashboard, name="dashboard"),
 ]

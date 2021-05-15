@@ -127,3 +127,6 @@ def postMessage(request):
         msg = request.POST.get('msg')
         Message(msg,driver)
         return render(request, "home.html")
+
+def dashboard(request): 
+    return render(request, "dashboard.html")
