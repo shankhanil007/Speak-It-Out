@@ -78,44 +78,7 @@ def AskToJoin(driver):
 # 	driver.find_element_by_xpath(xpath_btn).click()
 # 	driver.implicitly_wait(10)
 
-def enter(request): 
 
-    if request.method == "POST":
-        code = request.POST.get('code')
-
-        # create chrome instamce
-        opt = Options()
-        opt.add_argument('--disable-blink-features=AutomationControlled')
-        opt.add_argument('--start-maximized')
-        opt.add_experimental_option("prefs", {
-            "profile.default_content_setting_values.media_stream_mic": 1,
-            "profile.default_content_setting_values.media_stream_camera": 1,
-            "profile.default_content_setting_values.geolocation": 0,
-            "profile.default_content_setting_values.notifications": 1
-        })
-        global driver 
-        driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
-
-        # login to Google account
-        Glogin(mail_address, password, driver)
-        print('Login')
-
-        # go to google meet
-        driver.get('https://meet.google.com/'+code)
-
-        turnOffMicCam(driver)
-        print('Turned of MicCAM')
-
-        # AskToJoin()
-        joinNow(driver)
-
-        Message('Hello, This is a test message',driver)
-        time.sleep(2)
-        Message('Hello, This is a test message',driver)
-        
-        print("done")
-        
-        return render(request, "home.html")
 
 
 def dashboard(request): 
@@ -198,22 +161,26 @@ def meet(request):
         if meet_obj:
             if meet_obj.status :
                 context={'code':code}
-                return render(request, "postMessages.html", context)
+                return render(request, "postMessage.html", context)
 
             return render(request, "home.html")
         return render(request, "home.html")
 
+
+def meetMessage(request,slug):
+    context={'code':slug}
+    return render(request, "meetMessage.html", context)
 
 def postMessage(request,slug): 
 
     if request.method == "POST":
         content = request.POST.get('content')
         meet= Meet.objects.get(code=slug)
-        m=Message(content=content, meet=meet, code=slug)
-        m.save()
+        message=Message(content=content, meet=meet, code=slug)
+        message.save()
         context={'code':slug}
-        return render(request, "postMessages.html", context)
 
+    return render(request, "postMessage.html", context)
 
 def meetActivate(request): 
 
@@ -224,6 +191,47 @@ def meetActivate(request):
         return redirect(f"/{meetCode}/newMessages")
 
 def newMessages(request, slug): 
-    messages = Message.objects.filter(meet = slug)
+    messages = Message.objects.filter(code = slug)
+    context={'code':slug, 'messages': messages}
+    return render(request, "newMessages.html", context)
+
+
+def enter(request, slug): 
+
+    code = slug
+
+    # create chrome instamce
+    opt = Options()
+    opt.add_argument('--disable-blink-features=AutomationControlled')
+    opt.add_argument('--start-maximized')
+    opt.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.media_stream_mic": 1,
+        "profile.default_content_setting_values.media_stream_camera": 1,
+        "profile.default_content_setting_values.geolocation": 0,
+        "profile.default_content_setting_values.notifications": 1
+    })
+    global driver 
+    driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
+
+    # login to Google account
+    Glogin(mail_address, password, driver)
+    print('Login')
+
+    # go to google meet
+    driver.get('https://meet.google.com/'+code)
+
+    turnOffMicCam(driver)
+    print('Turned of MicCAM')
+
+    # AskToJoin()
+    joinNow(driver)
+
+    Message('Hello, This is a test message',driver)
+    time.sleep(2)
+    Message('Hello, This is a test message',driver)
+    
+    print("done")
+    
+    messages = Message.objects.filter(code = slug)
     context={'code':slug, 'messages': messages}
     return render(request, "newMessages.html", context)

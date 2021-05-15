@@ -15,7 +15,7 @@
 
     <div class="container">
         <h1 class="text-center">Enter your question</h1>
-        <form method="post" action="{{code}}/postMessage">
+        <form method="post" action="/{{code}}/postMessage">
         {% csrf_token %}
             <div class="form-group">
                 <label for="content">Question</label>

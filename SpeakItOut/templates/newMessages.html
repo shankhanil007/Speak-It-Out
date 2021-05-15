@@ -11,40 +11,11 @@
             <hr class="my-4">
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <p class="lead">
-                <form action="#" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Join Meet</button>
-                    </div>
-                </form>
+
+                <a href="/{{code}}/enter" class="btn btn-primary" >Join Meet</a>
                 <!-- <button class="btn btn-success" type="submit">New Messages</button> -->
                 <button class="btn btn-warning" type="submit">Buffer</button>
             </p>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="activateMeet" tabindex="-1" aria-labelledby="activateMeet" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalTitle">Activate your Google Meet</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" method="POST"> {% csrf_token %}
-                        <div class="form-group">
-                            <label for="username">Enter your meet code</label>
-                            <input type="text" class="form-control" id="meetCode" name="meetCode" placeholder="uos-qidg-ihs"required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
         </div>
     </div>
 
@@ -59,9 +30,9 @@
             </tr>
             </thead>
             <tbody>
-            {{for message in messages}}
+            {% for message in messages %}
             <tr>
-                <td>message.content</td>
+                <td>{{message.content}}</td>
                 <td><a href="#" class="btn btn-success btn-sm">Accept</a></td>
                 <td><a href="#" class="btn btn-warning btn-sm">Buffer</a></td>
                 <td><a href="#" class="btn btn-danger btn-sm">Cancel</a></td>
