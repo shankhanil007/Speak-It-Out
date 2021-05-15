@@ -8,6 +8,7 @@ import time
 mail_address = 'tatusharma321@gmail.com'
 password = 'malowali'
 
+
 def Glogin(mail_address, password,driver):
 	# Login Page
 	driver.get(
