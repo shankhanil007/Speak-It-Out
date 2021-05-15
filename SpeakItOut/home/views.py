@@ -156,22 +156,22 @@ def handleSignUp(request):
         # check for errorneous input
         if len(username)<10:
             messages.error(request, " Your user name must be under 10 characters")
-            return redirect('home')
+            return render(request, "dashboard.html")
 
         if not username.isalnum():
             messages.error(request, " User name should only contain letters and numbers")
-            return redirect('home')
+            return render(request, "dashboard.html")
         if (pass1!= pass2):
              messages.error(request, " Passwords do not match")
-             return redirect('home')
+             return render(request, "dashboard.html")
         
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name= fname
         myuser.last_name= lname
         myuser.save()
-        messages.success(request, " Your iCoder has been successfully created")
-        return redirect('home')
+        # messages.success(request, " Your iCoder has been successfully created")
+        return render(request, "dashboard.html")
 
     else:
         return HttpResponse("404 - Not found")
@@ -186,18 +186,16 @@ def handeLogin(request):
         user=authenticate(username= loginusername, password= loginpassword)
         if user is not None:
             login(request, user)
-            messages.success(request, "Successfully Logged In")
-            return redirect("home")
+            # messages.success(request, "Successfully Logged In")
+            return render(request, "dashboard.html")
         else:
-            messages.error(request, "Invalid credentials! Please try again")
-            return redirect("home")
+            # messages.error(request, "Invalid credentials! Please try again")
+            return render(request, "dashboard.html")
 
     return HttpResponse("404- Not found")
-   
-
     return HttpResponse("login")
 
 def handelLogout(request):
     logout(request)
-    messages.success(request, "Successfully logged out")
-    return redirect('home')
+    # messages.success(request, "Successfully logged out")
+    return render(request, "dashboard.html")
