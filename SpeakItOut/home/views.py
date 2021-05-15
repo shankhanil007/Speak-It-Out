@@ -65,8 +65,7 @@ def AskToJoin(driver):
 	# Ask to join and join now buttons have same xpaths
 
 
-def Message(driver):
-	message = 'Hello, This is a test message'
+def Message(message, driver):
 	# finding the text box to type message in text box.
 	x_path = '//*[@id="ow3"]/div[1]/div/div[9]/div[3]/div[4]/div/div[2]/div[2]/div[2]/span[2]/div/div[4]/div[1]/div[1]/div[2]/textarea'
 	driver.find_element_by_xpath(x_path).send_keys(message)
@@ -96,7 +95,8 @@ def enter(request):
             "profile.default_content_setting_values.geolocation": 0,
             "profile.default_content_setting_values.notifications": 1
         })
-        global driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
+        global driver 
+        driver = webdriver.Chrome('C:/Selenium Drivers/chromedriver.exe')
 
         # login to Google account
         Glogin(mail_address, password, driver)
@@ -111,10 +111,19 @@ def enter(request):
         # AskToJoin()
         joinNow(driver)
 
-        Message(driver)
-        time.sleep(5)
-        Message(driver)
+        Message('Hello, This is a test message',driver)
+        time.sleep(2)
+        Message('Hello, This is a test message',driver)
         
         print("done")
         
+        return render(request, "home.html")
+
+
+
+def postMessage(request): 
+
+    if request.method == "POST":
+        msg = request.POST.get('msg')
+        Message(msg,driver)
         return render(request, "home.html")

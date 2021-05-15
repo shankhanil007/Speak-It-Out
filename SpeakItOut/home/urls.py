@@ -5,4 +5,5 @@ from home import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('enter', views.enter, name="enter"),
+    path('message', views.postMessage, name="postMessage"),
 ]
