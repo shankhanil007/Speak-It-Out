@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from django.contrib.auth.models import User 
 from django.contrib.auth  import authenticate,  login, logout
+from home.models import Meet, Message
 
 # assign email id and password
 mail_address = 'tatusharma321@gmail.com'
@@ -132,8 +133,8 @@ def postMessage(request):
 def dashboard(request): 
     return render(request, "dashboard.html")
 
-def meet(request): 
-    return render(request, "meet.html")
+# def meet(request): 
+#     return render(request, "meet.html")
 
 
 def newMessages(request): 
@@ -199,3 +200,17 @@ def handelLogout(request):
     logout(request)
     # messages.success(request, "Successfully logged out")
     return render(request, "dashboard.html")
+
+
+def meet(request): 
+
+    if request.method=="POST":
+        code=request.POST['code']
+        meet_obj = Meet.objects.filter(user = user_obj ).first()
+
+        if meet_obj:
+            if meet_obj.status :
+                return render(request, "postMessages.html")
+
+
+
