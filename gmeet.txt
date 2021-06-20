@@ -1,0 +1,3 @@
+document.getElementsByClassName('uArJ5e Y5FYJe cjq2Db IOMpW Cs0vCd M9Bg4d')[0].click()
+document.getElementsByClassName('KHxj8b tL9Q4c')[0].value = 'Hello'
+document.getElementsByClassName('RpC4Ne oJeWuf')[0].innerHTML = "haskfasfas"
