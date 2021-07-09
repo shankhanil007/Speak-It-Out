@@ -8,8 +8,8 @@ from django.contrib.auth  import authenticate,  login, logout
 from home.models import Meet, Message, Buffer
 
 # assign email id and password
-mail_address = 'tatusharma321@gmail.com'
-password = 'malowali'
+mail_address = ''
+password = ''
 
 
 def Glogin(mail_address, password,driver):
